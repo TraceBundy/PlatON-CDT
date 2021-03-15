@@ -5,7 +5,7 @@
 
 using namespace platon;
 
-TEST_CASE(uint256, compile){
+TEST_CASE(uint256, compile) {
   constexpr std::uint256_t orign = 100;
   std::uint512_t other = orign;
   ASSERT_EQ(orign, std::uint256_t(100));
@@ -101,7 +101,6 @@ TEST_CASE(uint256, division) {
   ASSERT_EQ(orign, std::uint256_t(10));
   orign /= 10;
   ASSERT_EQ(orign, std::uint256_t(1));
-
 }
 
 TEST_CASE(uint256, mod) {
@@ -312,17 +311,19 @@ TEST_CASE(uint256, encode) {
   ASSERT_EQ(result, std::uint256_t(258));
 
   std::vector<uint8_t> new_bytes;
-  auto func = [](std::vector<uint8_t> &result, uint8_t one) { result.push_back(one); };
+  auto func = [](std::vector<uint8_t> &result, uint8_t one) {
+    result.push_back(one);
+  };
   {
     GasUsed(__LINE__, fn);
     result.ToBigEndian(new_bytes, func);
   }
 
   auto it = new_bytes.begin();
-  while(1){
-    if(it == new_bytes.end()) break;
+  while (1) {
+    if (it == new_bytes.end()) break;
 
-    if(0 == *it){
+    if (0 == *it) {
       it = new_bytes.erase(it);
     } else {
       break;
