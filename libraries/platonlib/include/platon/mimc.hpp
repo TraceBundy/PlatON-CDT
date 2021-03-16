@@ -15,7 +15,7 @@ private:
   const static std::vector<std::uint256_t> cts;
 
 public:
-  static std::vector<std::uint256_t> get_constants()
+  static std::vector<std::uint256_t> GetConstants()
   {
     std::vector<std::uint256_t> result;
     result.push_back(std::uint256_t(0));
@@ -39,13 +39,13 @@ public:
     return result;
   }
 
-  static void hash(const std::vector<std::uint256_t> &arr, std::uint256_t key,
+  static void Hash(const std::vector<std::uint256_t> &arr, std::uint256_t key,
                    uint8_t *result)
   {
     std::uint256_t r = key;
     for (auto one : arr)
     {
-      r = r + one + mimc7_hash(one, r);
+      r = r + one + Mimc7Hash(one, r);
       r = r % Q;
     }
 
@@ -55,7 +55,7 @@ public:
     std::copy(temp.begin(), temp.end(), result);
   }
 
-  static std::uint256_t mimc7_hash(std::uint256_t in_x, std::uint256_t in_k)
+  static std::uint256_t Mimc7Hash(std::uint256_t in_x, std::uint256_t in_k)
   {
     std::uint256_t h = 0;
     for (int i = 0; i < rounds; i++)
@@ -79,7 +79,7 @@ public:
     return (h + in_k) % Q;
   }
 
-  static void hash_bytes(const std::vector<uint8_t> &input, uint8_t *output)
+  static void HashBytes(const std::vector<uint8_t> &input, uint8_t *output)
   {
     constexpr size_t n = 31;
     size_t len = input.size();
@@ -100,6 +100,6 @@ public:
       elements.push_back(one);
     }
 
-    hash(elements, 0, output);
+    Hash(elements, 0, output);
   }
 };

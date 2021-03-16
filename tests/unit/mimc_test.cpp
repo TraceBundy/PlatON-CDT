@@ -11,7 +11,7 @@ TEST_CASE(mimc, hash) {
 
     const char* fn = "mimc hash";
     platon_debug_gas(__LINE__, fn, strlen(fn));
-    Mimc::hash_bytes(input, &result[0]);
+    Mimc::HashBytes(input, &result[0]);
     platon_debug_gas(__LINE__, fn, strlen(fn));
 
     std::uint256_t bigint_hash;
@@ -29,7 +29,7 @@ TEST_CASE(mimc, initial){
   //   printf("%s\t\n", std::to_string(one).c_str());
   // }
 
-  std::uint256_t jatel = Mimc::mimc7_hash(1, 2);
+  std::uint256_t jatel = Mimc::Mimc7Hash(1, 2);
   printf("%s\t\n", std::to_string(jatel).c_str());
 
   std::uint256_t a = 6;
